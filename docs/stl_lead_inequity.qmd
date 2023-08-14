@@ -1,0 +1,59 @@
+---
+title: "stl-lead-sb"
+author: "Sujan Bhattarai"
+execute:
+    warning: FALSE
+format: html
+editor: visual
+---
+
+## Task 1
+
+```{r}
+library('tidyverse')
+library('janitor')
+```
+
+Read the Stl_lead.csv data
+
+```{r}
+data_stl <- read_csv(here::here('data', 'stl_lead.csv')) %>% 
+            clean_names()
+```
+
+Summary Statistics of the data
+
+```{r}
+head(data_stl)
+tail(data_stl)
+dim (data_stl)
+```
+
+```{r}
+
+```
+
+```{r}
+ggplot(data_stl, aes(total_pop))+
+  geom_boxplot()
+```
+
+```{r}
+stl_lead_prop <- data_stl %>% 
+    mutate(prop_white = (white/total_pop) * 100)
+```
+
+Create a scatterplot
+
+```{r}
+ggplot(stl_lead_prop,
+       aes(pct_elevated)) +
+   geom_histogram(color='blue', fill="red")+
+    theme_bw()
+```
+
+Save the data
+
+```{r}
+ggsave(here::here("figs", "ScatterPlot.jpg"))
+```
